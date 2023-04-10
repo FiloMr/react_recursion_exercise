@@ -1,29 +1,22 @@
-import React from 'react';
-import RecursiveComponent from './RecursiveComponent';
-import useTimer from '../hooks/useTimer';
+import React from "react";
+import RecursiveComponent from "./RecursiveComponent";
+import useTimer from "../hooks/useTimer";
+import Memo, { memo } from "react";
 
-// write components here
-const One = () => null;
-const Two = () => null;
-const Three = () => null;
-
-const components = [
-	One,
-	Two,
-	Three,
-];
+const One = memo(({ children }) => <div>One {children}</div>);
+const Two = memo(({ children }) => <div>Two {children}</div>);
+const Three = memo(({ children }) => <div>Three {children}</div>);
+const components = [One, Two, Three];
 
 function Recursion() {
-	const seconds = useTimer();
+  const seconds = useTimer();
 
-	return (
-		<div className='App-wrapper'>
-			<div className='App-timer'>
-				{seconds} seconds
-			</div>
-			<RecursiveComponent components={components} />
-		</div>
-	);
+  return (
+    <div className="App-wrapper">
+      <div className="App-timer">{seconds} seconds</div>
+      <RecursiveComponent components={components} />
+    </div>
+  );
 }
 
 Recursion.propTypes = {
